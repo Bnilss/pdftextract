@@ -17,7 +17,7 @@ import subprocess
 import sys
 from pdftextract.utils import cfg, TableMiner
 
-bin_paths = {"text": cfg.this_path("xpdf", "pdftotext.exe"), "info": cfg.this_path("xpdf", "pdfinfo.exe"), "image": cfg.this_path("xpdf", "pdfimages.exe")}
+bin_paths = cfg.get_platform_bin_paths()
 
 class XPdf:
     """A convenient wrapper of the xpdf c++ library.
