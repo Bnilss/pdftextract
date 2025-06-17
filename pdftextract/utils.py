@@ -15,12 +15,14 @@ class Config:
             99:"There seems to be an unknown error"}
     TIME = 0
 
-    @staticmethod
-    def check_platf():
+    @classmethod
+    def get_platform_bin_paths(cls):
         """check the platform"""
         platf = sys.platform
         if platf.startswith("win"):
-            pass
+            return {"text": cls.this_path("xpdf", "pdftotext.exe"), "image": cls.this_path("xpdf", "pdfimages.exe"), "info": cls.this_path("xpdf", "pdfinfo.exe")}
+        elif platf.startswith("linux"):
+            return {"text": cls.this_path("xpdf-linux", "pdftotext"), "image": cls.this_path("xpdf-linux", "pdfimages"), "info": cls.this_path("xpdf-linux", "pdfinfo")}
         else:
             warn = """This plataform is not currently supported, check 'support.txt' file for
             information on how to run this class on other platforms."""
@@ -230,4 +232,3 @@ def match(pat, string):
 
 
 cfg = Config()
-cfg.check_platf()
