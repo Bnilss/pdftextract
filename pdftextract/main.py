@@ -17,7 +17,7 @@ import subprocess
 import sys
 from pdftextract.utils import cfg, TableMiner
 
-bin_path = cfg.this_path("xpdf", "pdftotext.exe")
+bin_paths = {"text": cfg.this_path("xpdf", "pdftotext.exe"), "info": cfg.this_path("xpdf", "pdfinfo.exe"), "image": cfg.this_path("xpdf", "pdfimages.exe")}
 
 class XPdf:
     """A convenient wrapper of the xpdf c++ library.
@@ -132,7 +132,7 @@ class XPdf:
             else: will return None & instead write it to a '.txt' file   
         """
         pdf_file = os.path.abspath(self.pdf_file)
-        script = bin_path
+        script = bin_paths["text"]
         if out_fname:
             return_str = False
         if keep_layout:
@@ -175,7 +175,7 @@ class XPdf:
         Title, Creator, Producer, CreationDate, ModDate, Tagged, Form, 
         Pages, Encrypted, Page size, File size, Optimized, PDF version
         """
-        script = bin_path
+        script = bin_path["info"]
         cmd = [script, self.pdf_file]
         res = self._run_cmd(cmd)
         infos = [line.strip('\r') for line in res.stdout.decode().split("\n") if line]
@@ -228,7 +228,7 @@ class XPdf:
         --------
         None, output image files to the outdir
         """
-        script = bin_path
+        script = bin_path["image"]
         pdf_file = os.path.abspath(self.pdf_file)
         outdir = os.path.abspath(outdir)
         dirname = os.path.dirname(outdir)
