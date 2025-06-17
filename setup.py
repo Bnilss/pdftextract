@@ -11,6 +11,7 @@ setup(
     packages=['pdftextract'],
     package_data={
         "xpdf":["*.exe"],
+        "xpdf-linux": ["*.*"]
     },
     classifiers=[
         "Programming Language :: Python :: 2",
