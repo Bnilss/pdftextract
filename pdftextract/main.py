@@ -175,7 +175,7 @@ class XPdf:
         Title, Creator, Producer, CreationDate, ModDate, Tagged, Form, 
         Pages, Encrypted, Page size, File size, Optimized, PDF version
         """
-        script = bin_path["info"]
+        script = bin_paths["info"]
         cmd = [script, self.pdf_file]
         res = self._run_cmd(cmd)
         infos = [line.strip('\r') for line in res.stdout.decode().split("\n") if line]
@@ -228,7 +228,7 @@ class XPdf:
         --------
         None, output image files to the outdir
         """
-        script = bin_path["image"]
+        script = bin_paths["image"]
         pdf_file = os.path.abspath(self.pdf_file)
         outdir = os.path.abspath(outdir)
         dirname = os.path.dirname(outdir)
